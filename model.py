@@ -53,7 +53,7 @@ def check_pool_size(num_fencers, proposed_pool_size):
         Returns boolean: if remaining fencers can fit into number of pools without exceeding + 1.
      '''
     number_of_pools = int(num_fencers / proposed_pool_size)
-    remaining_fencers = num_fencers % (number_of_pools * proposed_pool_size)
+    remaining_fencers = num_fencers - (number_of_pools * proposed_pool_size)
     if remaining_fencers / number_of_pools <= 1 :
         return True
     return False
