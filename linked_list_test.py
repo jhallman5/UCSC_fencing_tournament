@@ -1,5 +1,5 @@
 import unittest
-from linked_list import Linked_List
+from linked_list import Linked_List, Node
 
 class LL_test(unittest.TestCase):
     LL = None
@@ -31,6 +31,16 @@ class LL_test(unittest.TestCase):
         node_5 = {'first_name': ' Mehmet', 'last_name': 'TEPEDELENLIOGLU', 'rank': 'A15', 'team': 'EBFG '}
         self.LL.insert(node_5)
         self.assertDictEqual(node_5, self.LL.head.data, 'Inserting an evenly ranked node should insert at the first apprpriate location.')
+
+    def test_is_new_node_higher_rank(self):
+        #def is_new_node_higher_rank(self, current, new_node):
+        node_1 = Node({'first_name': ' Keith', 'last_name': 'LICHTEN', 'rank': 'A14', 'team': 'EBFG '})
+        node_2 = Node({'first_name': ' Alexandre', 'last_name': 'RACHTCHININE', 'rank': 'A15', 'team': 'NO FEAR'})
+        node_3 = Node({'first_name': ' Mehmet', 'last_name': 'TEPEDELENLIOGLU', 'rank': 'A15', 'team': 'EBFG '})
+
+        self.assertFalse(self.LL.is_new_node_higher_rank(node_2, node_1), 'Should return false when evaluating a new node that is lower rank than current.')
+        self.assertTrue(self.LL.is_new_node_higher_rank(node_1, node_2), 'Should return true when evaluating a new node that is higher rank than current.')
+        self.assertTrue(self.LL.is_new_node_higher_rank(node_2, node_3), 'Should return true when evaluating a new node that is equal rank to current.')
 
 if __name__ == '__main__':
     unittest.main()
