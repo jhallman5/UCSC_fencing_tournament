@@ -1,12 +1,20 @@
 import unittest
-from model import determine_num_pools, check_pool_size
+import os
+from model import create_linked_list, determine_num_pools, check_pool_size
 
 class Model_test(unittest.TestCase):
     ''' Model unit tests. '''
 
     def test_determine_num_pools(self):
         ''' Tests determine_num_pools(linked_list). '''
-        
+        LL_of_24 = create_linked_list('csv_files/MEconflicts.csv')
+        self.assertEqual(determine_num_pools(LL_of_24), 4, 'Should return the correct number of pools given a LL.')
+
+        LL_of_13 = create_linked_list('csv_files/MEshort.csv')
+        self.assertEqual(determine_num_pools(LL_of_13), 2, 'Should return the correct number of pools given a LL.')
+
+        LL_of_48 = create_linked_list('csv_files/MEentries.csv')
+        self.assertEqual(determine_num_pools(LL_of_48), 8, 'Should return the correct number of pools given a LL.')
 
     def test_check_pool_size(self):
         ''' Tests check_pool_size(num_fencers, proposed_pool_size). '''
