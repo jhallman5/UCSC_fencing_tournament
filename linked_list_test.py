@@ -53,17 +53,20 @@ class LL_test(unittest.TestCase):
     def test_init(self):
         ''' Tests initialization. '''
         self.assertEqual(self.LL.head, None, 'Initial HEAD should be None.')
+        self.assertEqual(self.LL.length, 0, 'Length initializes at 0.')
 
     def test_insert(self):
         ''' Tests linked_list method: insert(self, data). '''
         node_1 = {'first_name': ' Keith', 'last_name': 'LICHTEN', 'rank': 'A14', 'team': 'EBFG '}
         self.LL.insert(node_1)
         self.assertDictEqual(node_1, self.LL.head.data, 'Inserting 1 into empty list should create the head.')
+        self.assertEqual(self.LL.length, 1, 'Length increments when a node is added.')
 
         node_2 = {'first_name': ' Alexandre', 'last_name': 'RACHTCHININE', 'rank': 'A15', 'team': 'NO FEAR'}
         self.LL.insert(node_2)
         self.assertDictEqual(node_2, self.LL.head.data, 'Inserting a higher rank node should update the head to point to the new node.')
         self.assertDictEqual(node_1, self.LL.head.next_node.data, 'The previous head should be the new second node. ')
+        self.assertEqual(self.LL.length, 2, 'Length increments when a node is added.')
 
         node_3 = {'first_name': ' Joseph', 'last_name': 'HARRINGTON', 'rank': 'B15', 'team': 'NO FEAR'}
         self.LL.insert(node_3)
