@@ -1,8 +1,12 @@
 import unittest
-from model import check_pool_size
+from model import determine_num_pools, check_pool_size
 
 class Model_test(unittest.TestCase):
     ''' Model unit tests. '''
+
+    def test_determine_num_pools(self):
+        ''' Tests determine_num_pools(linked_list). '''
+        
 
     def test_check_pool_size(self):
         ''' Tests check_pool_size(num_fencers, proposed_pool_size). '''

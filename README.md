@@ -18,5 +18,4 @@ python2.7 model_test.py
 
 TEST create_linked_list
 while loop in create init pools might not be necessary.
-perhaps take sys args out of model
-check tournament size 
+check tournament size

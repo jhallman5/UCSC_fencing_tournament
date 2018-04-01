@@ -1,10 +1,9 @@
-import sys
 import csv
 from linked_list import Node, Linked_List
 
-def create_linked_list():
+def create_linked_list(fencers_csv):
     ''' Creates a sorted linked list from a CSV file. '''
-    with open(sys.argv[1]) as csv_file:
+    with open(fencers_csv) as csv_file:
         fencer_list = Linked_List()
         reader = csv.reader(csv_file, delimiter='\t')
         for row in reader:
