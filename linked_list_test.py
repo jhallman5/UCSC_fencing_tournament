@@ -1,7 +1,30 @@
 import unittest
 from linked_list import Linked_List, Node
 
+class Node_test(unittest.TestCase):
+    ''' Node unit tests. '''
+
+    def test_empty_init(self):
+        ''' Tests Empty Node initialization. '''
+        new_node = Node()
+        self.assertEqual(new_node.data, None, 'Empty Nodes should contain no data.')
+        self.assertEqual(new_node.next_node, None, 'Empty Nodes should have no next_node property.')
+
+    def test_data_init(self):
+        ''' Tests Node initialization containing data. '''
+        provided_data = {'first_name': ' Keith', 'last_name': 'LICHTEN', 'rank': 'A14', 'team': 'EBFG '}
+        new_node = Node(provided_data)
+        self.assertDictEqual(new_node.data, provided_data, 'The new node data property should match the data given.')
+        self.assertEqual(new_node.next_node, None, 'The next_node property should be None.')
+
+    def test_get_data(self):
+        ''' Tests Node method: get_data(self). '''
+        provided_data = {'first_name': ' Keith', 'last_name': 'LICHTEN', 'rank': 'A14', 'team': 'EBFG '}
+        new_node = Node(provided_data)
+        self.assertDictEqual(new_node.get_data(), new_node.data, 'Should return the nodes data.')
+
 class LL_test(unittest.TestCase):
+    ''' Linked List unit tests. '''
     LL = None
 
     def setUp(self):
@@ -9,7 +32,7 @@ class LL_test(unittest.TestCase):
         self.LL = Linked_List()
 
     def test_init(self):
-        ''' Tests Initialization. '''
+        ''' Tests initialization. '''
         self.assertEqual(self.LL.head, None, 'Initial HEAD should be None.')
 
     def test_insert(self):
@@ -71,7 +94,6 @@ class LL_test(unittest.TestCase):
         node_2 = Node({'first_name': ' Tomas', 'last_name': 'STRAKA', 'rank': 'U', 'team': ''})
         self.assertEqual(self.LL.get_year_rank(node_1), str(14), 'Given a node with a year ranking, should return the year ranking.')
         self.assertEqual(self.LL.get_year_rank(node_2), '', 'Given a node without a year ranking, should return an empty string.')
-
 
 if __name__ == '__main__':
     unittest.main()
