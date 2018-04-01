@@ -23,6 +23,25 @@ class Node_test(unittest.TestCase):
         new_node = Node(provided_data)
         self.assertDictEqual(new_node.get_data(), new_node.data, 'Should return the nodes data.')
 
+    def test_set_next(self):
+        ''' Tests Node method: set_next(self, new_next). '''
+        initial_node = Node({'first_name': ' Keith', 'last_name': 'LICHTEN', 'rank': 'A14', 'team': 'EBFG '})
+        self.assertEqual(initial_node.next_node, None, 'Check for next_node == None.')
+
+        new_node = Node({'first_name': ' Tomas', 'last_name': 'STRAKA', 'rank': 'A12', 'team': ''})
+        initial_node.set_next(new_node)
+        self.assertEqual(initial_node.next_node, new_node, 'The next_node property sets correctly.')
+        self.assertEqual(new_node.next_node, None, 'The next_node property does not set recursively.')
+
+    def test_get_next(self):
+        ''' Tests Node method: get_next(self). '''
+        initial_node = Node({'first_name': ' Keith', 'last_name': 'LICHTEN', 'rank': 'A14', 'team': 'EBFG '})
+        self.assertEqual(initial_node.get_next(), None, 'The next_node property should not be set upon init.')
+
+        new_node = Node({'first_name': ' Tomas', 'last_name': 'STRAKA', 'rank': 'A12', 'team': ''})
+        initial_node.set_next(new_node)
+        self.assertEqual(initial_node.get_next(), new_node, 'Should return the next_node property.')
+
 class LL_test(unittest.TestCase):
     ''' Linked List unit tests. '''
     LL = None
@@ -36,7 +55,7 @@ class LL_test(unittest.TestCase):
         self.assertEqual(self.LL.head, None, 'Initial HEAD should be None.')
 
     def test_insert(self):
-        ''' Tests linked_list method: insert. '''
+        ''' Tests linked_list method: insert(self, data). '''
         node_1 = {'first_name': ' Keith', 'last_name': 'LICHTEN', 'rank': 'A14', 'team': 'EBFG '}
         self.LL.insert(node_1)
         self.assertDictEqual(node_1, self.LL.head.data, 'Inserting 1 into empty list should create the head.')
