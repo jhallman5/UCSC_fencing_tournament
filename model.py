@@ -58,9 +58,26 @@ def check_pool_size(num_fencers, proposed_pool_size):
         return True
     return False
 
-def sort_pools(init_pools):
+def sort_pools(init_pools, linked_list):
+    teams_requiring_sorting(linked_list)
+    # print init_pools
+    print '---> ', init_pools[3][2].get('team').strip()
     return init_pools
-    
+
+def teams_requiring_sorting(linked_list):
+    ''' Returns a dict of team:member_count which are > 1.'''
+    current_node = linked_list.head
+    teams_dict = {}
+    while current_node:
+        team = current_node.data.get('team').strip()
+        if not teams_dict.get(team):
+            teams_dict[team] = 1
+        else:
+            teams_dict[team] += 1
+        current_node = current_node.next_node
+    print 'TRS--> ', {k:v for k,v in teams_dict.items() if v > 1 and len(k)}
+    return {k:v for k,v in teams_dict.items() if v > 1 and len(k)}
+
 def print_pools(pools):
     print 'Pool List'
     for index, pool in enumerate(pools):
