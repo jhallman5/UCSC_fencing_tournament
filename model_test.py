@@ -1,5 +1,4 @@
 import unittest
-import os
 from model import create_init_pools, create_linked_list, determine_num_pools, check_pool_size
 from linked_list import Linked_List, Node
 
