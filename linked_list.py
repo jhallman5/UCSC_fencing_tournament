@@ -15,10 +15,12 @@ class Node:
 class Linked_List:
     def __init__(self, head=None):
         self.head = head
+        self.length = 0
 
     def insert(self, data):
         ''' Creates a Node from provided data and inserts it into the sorted LL. '''
         new_node = Node(data)
+        self.length += 1
         if not self.head:
             self.head = new_node
             return
