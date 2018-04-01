@@ -65,9 +65,13 @@ class LL_test(unittest.TestCase):
         node_6 = Node({'first_name': ' Tomas', 'last_name': 'STRAKA', 'rank': 'U', 'team': ''})
         self.assertEqual(self.LL.get_letter_rank(node_6), 0, 'A Node of rank U should return 0.')
 
-    # def test_get_year_rank(self):
-    #     ''' Tests linked_list method: get_year_rank(self, node). '''
-    #
+    def test_get_year_rank(self):
+        ''' Tests linked_list method: get_year_rank(self, node). '''
+        node_1 = Node({'first_name': ' Keith', 'last_name': 'LICHTEN', 'rank': 'A14', 'team': 'EBFG '})
+        node_2 = Node({'first_name': ' Tomas', 'last_name': 'STRAKA', 'rank': 'U', 'team': ''})
+        self.assertEqual(self.LL.get_year_rank(node_1), str(14), 'Given a node with a year ranking, should return the year ranking.')
+        self.assertEqual(self.LL.get_year_rank(node_2), '', 'Given a node without a year ranking, should return an empty string.')
+
 
 if __name__ == '__main__':
     unittest.main()
