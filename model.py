@@ -57,3 +57,13 @@ def check_pool_size(num_fencers, proposed_pool_size):
     if remaining_fencers / number_of_pools <= 1 :
         return True
     return False
+
+def sort_pools(init_pools):
+    return init_pools
+    
+def print_pools(pools):
+    print 'Pool List'
+    for index, pool in enumerate(pools):
+        print '-)------ Pool # %s ------(- (%s)' % ((index + 1), len(pool))
+        for player in pool:
+            print '\t'.join((player.get('first_name'), player.get('last_name'), player.get('team'), player.get('rank')[0], player.get('rank')[1:]))

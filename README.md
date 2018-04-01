@@ -18,3 +18,4 @@ python2.7 model_test.py
 
 while loop in create init pools might not be necessary.
 check tournament size
+print_pools needs to be tested 
