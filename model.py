@@ -58,6 +58,9 @@ def check_pool_size(num_fencers, proposed_pool_size):
         return True
     return False
 
+def sort_pools(init_pools):
+    return init_pools
+    
 def print_pools(pools):
     print 'Pool List'
     for index, pool in enumerate(pools):
