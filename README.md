@@ -10,4 +10,11 @@ python2.7 sort_teams.py [CSV FILE]
 test:
 ```
 python2.7 linked_list_test.py
+python2.7 model_test.py
+
 ```
+
+## TODO:
+
+while loop in create init pools might not be necessary.
+check tournament size
