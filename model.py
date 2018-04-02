@@ -179,3 +179,9 @@ def print_pools(pools):
         print '-)------ Pool # %s ------(- (%s)' % ((index + 1), len(pool))
         for player in pool:
             print '\t'.join((player.get('first_name'), player.get('last_name'), player.get('team'), player.get('rank')[0], player.get('rank')[1:]))
+
+def check_length(linked_list):
+    if linked_list.length < 12:
+        raise ValueError('Not enough participates')
+    if linked_list.length > 100:
+        raise ValueError('Too many participates')
