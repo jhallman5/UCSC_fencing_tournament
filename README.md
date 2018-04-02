@@ -2,20 +2,20 @@
 
 fencing tournament pool assignment.
 
-input:
+To run a CSV file:
 ```
 python2.7 sort_teams.py [CSV FILE]
 ```
 
-test:
+To run tests:
 ```
-python2.7 linked_list_test.py
-python2.7 model_test.py
-
+python2.7 linked_list_test.py && python2.7 model_test.py
 ```
 
-## TODO:
+# Issues
+Sorting algorithm needs to become functional.
 
-while loop in create init pools might not be necessary.
-check tournament size
-print_pools needs to be tested 
+# TODOS
+Sorting algorithm needs to be broken up and tested.
+Figure out the best way to recursively call test files.
+A function to eval ranks would be useful. 

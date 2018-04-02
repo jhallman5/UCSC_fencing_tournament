@@ -69,7 +69,7 @@ def sort_pools(init_pools, linked_list):
         pool_arg = find_pool_arrangment(init_pools, team)
         pool_accept = find_pool_acceptability(pool_arg, min_members_per_pool)
         handled_pools = handle_pool_excess(pool_accept,remaining_max_pools )
-        final_pools = swap_members(final_pools, handled_pools, team)
+        final_pools = swap_members(final_pools, handled_pools, team, TRS)
     return final_pools
 
 def find_pool_arrangment(init_pools, team):
@@ -101,7 +101,7 @@ def handle_pool_excess(PA,remaining_max_pools):
             limit_max_pools.append(pool)
     return limit_max_pools
 
-def swap_members(current_pools, handled_pools, team):
+def swap_members(current_pools, handled_pools, team, TRS):
     ''' Handles swaps of members. '''
     pool_index_to_move = []
     pool_index_to_accept = []
@@ -112,8 +112,8 @@ def swap_members(current_pools, handled_pools, team):
             pool_index_to_accept.append(index)
     if not len(pool_index_to_move):
         return current_pools
-    for index, pool2 in enumerate(pool_index_to_move):
-        num_players_to_remove = abs(handled_pools[pool2])
+    for index, pool in enumerate(pool_index_to_move):
+        num_players_to_remove = abs(handled_pools[pool])
         possible_rm_moves = []
         for player in current_pools[pool_index_to_move[index]]:
             if player.get('team').strip() == team:
@@ -132,7 +132,7 @@ def swap_members(current_pools, handled_pools, team):
         for x in range(len(possible_rm_moves)):
             player_to_swap = possible_rm_moves[x]
             p_rank = player_to_swap.get('rank')
-            location_to_swap = find_location_to_swap(current_pools, p_rank)
+            location_to_swap = find_location_to_swap(current_pools, p_rank, TRS, current_pools[pool_index_to_move[index]])
             swap_a_store = current_pools[location_to_swap[0]][location_to_swap[1]]
             player_to_swap_index = current_pools[pool_index_to_move[index]].index(player_to_swap)
             swap_b_store = current_pools[pool_index_to_move[index]][player_to_swap_index]
@@ -140,17 +140,25 @@ def swap_members(current_pools, handled_pools, team):
             current_pools[pool_index_to_move[index]][player_to_swap_index] = swap_a_store
     return current_pools
 
-def find_location_to_swap(pools, rank):
+def find_location_to_swap(pools, rank, TRS, pool_index_to_move):
     ''' Returns tuple of coordinates to swap. '''
     for idx, pool in enumerate(pools):
-        for index, player in enumerate(pool):
-            if player.get('team').strip() == '':
-                PR = player.get('rank')
-                if ord(rank[0]) < ord(PR[0]):
-                    return (idx, index)
-                if ord(rank[0]) == ord(PR[0]):
-                    if rank[1:] > PR[1:]:
+        if not idx == pools.index(pool_index_to_move):
+            for index, player in enumerate(pool):
+                if player.get('team').strip() == '':
+                    PR = player.get('rank')
+                    if ord(rank[0]) < ord(PR[0]):
                         return (idx, index)
+                    if ord(rank[0]) == ord(PR[0]):
+                        if rank[1:] > PR[1:]:
+                            return (idx, index)
+                if player.get('team').strip() not in TRS.keys():
+                    PR = player.get('rank')
+                    if ord(rank[0]) < ord(PR[0]):
+                        return (idx, index)
+                    if ord(rank[0]) == ord(PR[0]):
+                        if rank[1:] > PR[1:]:
+                            return (idx, index)
 
 def teams_requiring_sorting(linked_list):
     ''' Returns a dict of team:member_count which are > 1.'''
